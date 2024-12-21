@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     // Fetch users from the backend server when the component mounts
-    fetch('http://localhost:5000/api/users')
+    fetch('/api/users')
       .then(response => response.json())
       .then(data => setUsers(data))
       .catch(error => console.error('Error fetching users:', error));
@@ -41,7 +41,7 @@ function App() {
 
   const handleSave = () => {
     // Send a PUT request to the backend server to update the user information
-    fetch(`http://localhost:5000/api/users/${currentUser.email}`, {
+    fetch(`/api/users/${currentUser.email}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ function CreateUser({ users, setUsers, setShowUserList }) {
     }
 
     // Send a POST request to the backend server to create a new user
-    fetch('http://localhost:5000/api/users', {
+    fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
