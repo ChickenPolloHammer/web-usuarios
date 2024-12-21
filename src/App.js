@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { Route, Switch, Link, useNavigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -145,9 +145,9 @@ function App() {
           </div>
         )}
       </main>
-      <Routes>
+      <Switch>
         <Route path="/create-user" element={<CreateUser users={users} setUsers={setUsers} setShowUserList={setShowUserList} />} />
-      </Routes>
+      </Switch>
     </div>
   );
 }
