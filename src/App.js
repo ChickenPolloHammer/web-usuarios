@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Link, useHistory } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -145,18 +145,16 @@ function App() {
           </div>
         )}
       </main>
-      <Switch>
-        <Route path="/create-user">
-          <CreateUser users={users} setUsers={setUsers} setShowUserList={setShowUserList} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/create-user" element={<CreateUser users={users} setUsers={setUsers} setShowUserList={setShowUserList} />} />
+      </Routes>
     </div>
   );
 }
 
 function CreateUser({ users, setUsers, setShowUserList }) {
   const [newUser, setNewUser] = useState({ name: '', phone: '', email: '', description: '', password: '' });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -187,7 +185,7 @@ function CreateUser({ users, setUsers, setShowUserList }) {
         setUsers([...users, data]);
         setNewUser({ name: '', phone: '', email: '', description: '', password: '' });
         setShowUserList(true);
-        history.push('/');
+        navigate('/');
       })
       .catch(error => console.error('Error creating user:', error));
   };
