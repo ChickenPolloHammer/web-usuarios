@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -34,6 +35,12 @@ app.put('/api/users/:email', (req, res) => {
   const updatedUser = req.body;
   users = users.map(user => (user.email === email ? updatedUser : user));
   res.json(updatedUser);
+});
+
+// Serve frontend build files
+app.use(express.static('build'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 // Start the server
